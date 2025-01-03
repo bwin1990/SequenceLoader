@@ -135,6 +135,8 @@ class GUI:
         self.window = tk.Tk()
         self.window.title("DNA序列文件处理工具")
         self.setup_ui()
+        # 添加回调函数属性
+        self.on_file_selected_callback = None
         
     def setup_ui(self):
         """设置主界面"""
@@ -143,12 +145,30 @@ class GUI:
         main_frame.pack(fill='both', expand=True)
         
         # 添加文件选择按钮
-        select_btn = ttk.Button(main_frame, text="载入序列文件选择", command=self.select_file)
+        select_btn = ttk.Button(main_frame, text="载入序列文件选择", command=self._handle_file_selection)
         select_btn.pack(pady=5)
         
         # 添加配置编辑按钮
         config_btn = ttk.Button(main_frame, text="编辑配置", command=self.open_config_editor)
         config_btn.pack(pady=5)
+        
+        # 添加状态显示标签
+        self.status_label = ttk.Label(main_frame, text="")
+        self.status_label.pack(pady=5)
+    
+    def _handle_file_selection(self):
+        """处理文件选择"""
+        file_path = self.select_file()
+        if file_path and self.on_file_selected_callback:
+            self.on_file_selected_callback(file_path)
+    
+    def set_file_selected_callback(self, callback):
+        """设置文件选择后的回调函数"""
+        self.on_file_selected_callback = callback
+    
+    def update_status(self, message):
+        """更新状态显示"""
+        self.status_label.config(text=message)
     
     def open_config_editor(self):
         """打开配置编辑器"""

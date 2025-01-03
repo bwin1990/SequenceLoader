@@ -3,7 +3,7 @@ from pathlib import Path
 
 class FileHandler:
     def __init__(self, config_path):
-        with open(config_path, 'r') as f:
+        with open(config_path, 'r', encoding='utf-8') as f:
             self.config = yaml.safe_load(f)
     
     def get_target_file(self, source_file_path):
@@ -18,10 +18,10 @@ class FileHandler:
     
     def copy_content(self, source_path, target_path):
         """清空目标文件并复制内容"""
-        with open(target_path, 'w') as f:
+        with open(target_path, 'w', encoding='utf-8') as f:
             f.write('')  # 清空文件
             
-        with open(source_path, 'r') as source:
+        with open(source_path, 'r', encoding='utf-8') as source:
             content = source.read()
-            with open(target_path, 'w') as target:
+            with open(target_path, 'w', encoding='utf-8') as target:
                 target.write(content) 
