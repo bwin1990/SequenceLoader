@@ -1,0 +1,17 @@
+default_source_dir: E:/北京简辑
+target_files:
+  txt_b:
+    line_range:
+    - 10000
+    - 20000
+    path: E:/北京简辑/seqA.txt
+  txt_c:
+    line_range:
+    - 1
+    - 2
+    path: E:/北京简辑/seqB.txt
+  txt_d:
+    line_range:
+    - 301
+    - 400
+    path: C:/path/to/D.txt
